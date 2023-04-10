@@ -16,3 +16,13 @@ let newArrayOfStrings = [];
 // Позволяет на лету выполнять операции с парой ключ-значение
 Array.from(myMap, ([key,value]) => newArrayOfStrings.push(`${key} - ${value}`) );
 console.log(newArrayOfStrings);
+
+const saveInput = function () {
+
+    let currentInput = document.getElementsByTagName('input')[0].value.toLowerCase();
+
+    alert('Последний ввод: ' + this.lastInput + '\n'
+        + 'Текущий ввод: ' + currentInput);
+
+    this.lastInput = currentInput;
+}
