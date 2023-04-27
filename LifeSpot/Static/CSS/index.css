@@ -37,10 +37,10 @@ header,footer,body,.video-container{
 }
 
 /* Стили панели навигации при наведении мышью */
-.navbar p:hover{
+/*.navbar p:hover{
     color: aliceblue;
 }
-
+*/
 /* Глобальные стили для хедеров на всём сайте */
 header{
     color: black;
@@ -79,7 +79,9 @@ aside{
     font-size: large;
 }
 
-body{
+body {
+    background-image: url("https://i.gifer.com/embedded/download/U3Aa.gif");
+    background-size: cover;
     padding-left: 250px;
     height: 100%;
     min-height: 100vh;
