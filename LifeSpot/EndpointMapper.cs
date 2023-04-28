@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using System.IO;
+using System.Net.WebSockets;
+using System.Security.Permissions;
 using System.Text;
 
 namespace LifeSpot
@@ -40,6 +42,21 @@ namespace LifeSpot
                     var js = await File.ReadAllTextAsync(jsPath);
                     await context.Response.WriteAsync(js);
                 });
+            }
+        }
+        public static void MapImage(this IEndpointRouteBuilder builder)
+        {
+            var imageFiles = new[] { "london.jpg", "ny.jpg", "spb.jpg" };
+
+            foreach (var filiname in imageFiles)
+            {
+                builder.MapGet($"/slider/{filiname}", async context =>
+                {
+                    var imgPath = Path.Combine(Directory.GetCurrentDirectory(), "slider", filiname);
+                    var img = await File.ReadAllBytesAsync(imgPath);
+                    await context.Response.Body.WriteAsync(img);
+                });
+
             }
         }
         /// <summary>
