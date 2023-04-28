@@ -80,7 +80,7 @@ aside{
 }
 
 body {
-    background-image: url("https://i.gifer.com/embedded/download/U3Aa.gif");
+    background-image: url("https://klike.net/uploads/posts/2022-11/1669696855_3-33.jpg");
     background-size: cover;
     padding-left: 250px;
     height: 100%;
@@ -101,4 +101,16 @@ input {
 
 input:focus {
     border: 2px solid dimgrey;
+
+}
+
+.slider {
+    margin: 0 auto;
+    height: 408px;
+    width: 1000px;
+    background-color: rgb(182, 203, 222);
+}
+
+.hidden{
+    display: none;
 }

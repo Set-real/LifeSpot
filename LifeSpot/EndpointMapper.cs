@@ -9,42 +9,38 @@ namespace LifeSpot
     public static class EndpointMapper
     {
         /// <summary>
-        /// Мэппинг СSS-файлов
+        ///  Маппинг CSS-файлов
         /// </summary>
-        /// <param name="bilder"></param>
-        public static void MapCss(this IEndpointRouteBuilder bilder)
+        public static void MapCss(this IEndpointRouteBuilder builder)
         {
-            var cssFile = new[] { "index.css" };
+            var cssFiles = new[] { "index.css" };
 
-            foreach (var fileName in cssFile) 
+            foreach (var fileName in cssFiles)
             {
-                bilder.MapGet($"/ Static / CSS /{fileName}", async context =>
+                builder.MapGet($"/Static/CSS/{fileName}", async context =>
                 {
                     var cssPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "CSS", fileName);
-
                     var css = await File.ReadAllTextAsync(cssPath);
                     await context.Response.WriteAsync(css);
                 });
             }
         }
         /// <summary>
-        /// Мэппинг JS
+        ///  Маппинг JS
         /// </summary>
-        /// <param name="bilder"></param>
-        public static void MapJs(this IEndpointRouteBuilder bilder)
+        public static void MapJs(this IEndpointRouteBuilder builder)
         {
-            var jsFile = new[] { "index.js", "testing.js", "about.js" };
+            var jsFiles = new[] { "index.js", "testing.js", "about.js" };
 
-            foreach(var fileName in jsFile)
+            foreach (var fileName in jsFiles)
             {
-                bilder.MapGet($"/Static/JS/{fileName}", async context =>
+                builder.MapGet($"/Static/JS/{fileName}", async context =>
                 {
                     var jsPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "JS", fileName);
-
                     var js = await File.ReadAllTextAsync(jsPath);
                     await context.Response.WriteAsync(js);
                 });
-            } 
+            }
         }
         /// <summary>
         ///  Маппинг Html-страниц
@@ -55,16 +51,16 @@ namespace LifeSpot
             string sideBarHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "sidebar.html"));
             string sliderHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "slider.html"));
 
-            builder.MapGet("/about", async context =>
+            builder.MapGet("/", async context =>
             {
-                var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "about.html");
+                var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "index.html");
+                var viewText = await File.ReadAllTextAsync(viewPath);
 
+                // Загружаем шаблон страницы, вставляя в него элементы
                 var html = new StringBuilder(await File.ReadAllTextAsync(viewPath))
                     .Replace("<!--SIDEBAR-->", sideBarHtml)
-                    .Replace("<!--FOOTER-->", footerHtml)
-                    // Добавим для загрузки слайдера
-                    .Replace("<!--SLIDER-->", sliderHtml);
-
+                    .Replace("<!--FOOTER-->", footerHtml);
+                    
                 await context.Response.WriteAsync(html.ToString());
             });
 
@@ -84,13 +80,15 @@ namespace LifeSpot
             {
                 var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "about.html");
 
-                // Загружаем шаблон страницы, вставляя в него элементы
                 var html = new StringBuilder(await File.ReadAllTextAsync(viewPath))
                     .Replace("<!--SIDEBAR-->", sideBarHtml)
-                    .Replace("<!--FOOTER-->", footerHtml);
+                    .Replace("<!--FOOTER-->", footerHtml)
+                    // Добавим для загрузки слайдера
+                    .Replace("<!--SLIDER-->", sliderHtml);
 
                 await context.Response.WriteAsync(html.ToString());
             });
         }
     }
 }
+
