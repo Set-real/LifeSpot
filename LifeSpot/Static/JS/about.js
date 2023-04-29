@@ -131,15 +131,15 @@ function sliderWorks() {
 
     // Логика по сокрытию неиспользуемых слайдов
     sliderItems.forEach(function (slide, index) {
-        if (index !== 0) {
-            slide.classList.add('hidden')
+        if (index != 0) {
+            slide.classList.add('hidden', true)
         }
     })
 
     // При нажатии на слайд вызывается новый слайд, а старый скрывается
     slider.addEventListener('click', function () {
         // Скрываем текущий слайд
-        slider.classList.add('hidden');
+        slider.classList.add('hidden', true);
 
         // Рассчитываем индекс следующего слайда
         let nextSlideIndex;
@@ -153,6 +153,6 @@ function sliderWorks() {
         const nextSlide = slider.querySelector(`[data-index = "${nextSlideIndex}"]`)
 
         // Отображаем следующий слайд
-        nextSlide.classList.remove('hidden')
+        nextSlide.classList.remove('hidden', true)
     })
 }

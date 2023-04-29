@@ -44,19 +44,23 @@ namespace LifeSpot
                 });
             }
         }
+        /// <summary>
+        /// Маппинг папки с изображениями
+        /// </summary>
+        /// <param name="builder"></param>
         public static void MapImage(this IEndpointRouteBuilder builder)
         {
             var imageFiles = new[] { "london.jpg", "ny.jpg", "spb.jpg" };
 
+
             foreach (var filiname in imageFiles)
             {
-                builder.MapGet($"/slider/{filiname}", async context =>
+                builder.MapGet($"/Views/Shared/Image/{filiname}", async context =>
                 {
-                    var imgPath = Path.Combine(Directory.GetCurrentDirectory(), "slider", filiname);
-                    var img = await File.ReadAllBytesAsync(imgPath);
-                    await context.Response.Body.WriteAsync(img);
+                    var imgPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "Image", filiname);
+                    context.Response.ContentType = "image/jpg";
+                    await context.Response.Body.WriteAsync(File.ReadAllBytes(imgPath));
                 });
-
             }
         }
         /// <summary>
