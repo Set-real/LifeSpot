@@ -101,16 +101,4 @@ input {
 
 input:focus {
     border: 2px solid dimgrey;
-
-}
-
-.slider {
-    margin: 0 auto;
-    height: 408px;
-    width: 1000px;
-    background-color: rgb(182, 203, 222);
-}
-
-.hidden{
-    display: none;
 }

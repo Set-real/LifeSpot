@@ -52,7 +52,6 @@ namespace LifeSpot
         {
             var imageFiles = new[] { "london.jpg", "ny.jpg", "spb.jpg" };
 
-
             foreach (var filiname in imageFiles)
             {
                 builder.MapGet($"/Views/Shared/Image/{filiname}", async context =>

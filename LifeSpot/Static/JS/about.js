@@ -121,38 +121,15 @@ function addLike(id) {
     element.innerText = array.join(' ')
 }
 // Метод для работы слайдера
-function sliderWorks() {
+let currentSlide = 0;
+function showSlides() {
+    let slides = document.getElementsByClassName("mySlides");
 
-    // Находим слайдер на странице
-    const slider = document.querySelector('#slid');
 
-    // Превращаем коллекцию слайдов в массив
-    const sliderItems = Array.from(slider.children);
-
-    // Логика по сокрытию неиспользуемых слайдов
-    sliderItems.forEach(function (slide, index) {
-        if (index != 0) {
-            slide.classList.add('hidden', true)
-        }
-    })
-
-    // При нажатии на слайд вызывается новый слайд, а старый скрывается
-    slider.addEventListener('click', function () {
-        // Скрываем текущий слайд
-        slider.classList.add('hidden', true);
-
-        // Рассчитываем индекс следующего слайда
-        let nextSlideIndex;
-        if (index + 1 === sliderItems.length) {
-            nextSlideIndex = 0;
-        } else {
-            nextSlideIndex = index + 1;
-        }
-
-        // Находим следующий слайд
-        const nextSlide = slider.querySelector(`[data-index = "${nextSlideIndex}"]`)
-
-        // Отображаем следующий слайд
-        nextSlide.classList.remove('hidden', true)
-    })
+    if (currentSlide >= slides.length) { currentSlide = 0 }
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slides[currentSlide].style.display = "block";
+    currentSlide += 1;
 }
